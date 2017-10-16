@@ -1,0 +1,7 @@
+@param.idl
+@detector_param.idl
+@beam_param.idl
+@view_param.idl
+@mesh_param.idl
+@equil_param.idl
+@prof_param.idl

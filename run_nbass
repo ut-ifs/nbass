@@ -1,0 +1,5 @@
+#!/bin/bash
+export NBASS_PATH="/home/helimak/kenliao/nbass_distro"
+export NBASS_RUNS_PATH="/home/helimak/kenliao/nbass_distro/runs"
+export IDL_PATH="$NBASS_PATH:$NBASS_PATH/lib:$NBASS_PATH/tools:$IDL_PATH"
+idl run_nbass.pro -quiet

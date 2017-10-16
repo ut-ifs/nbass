@@ -1,0 +1,169 @@
+NBASS is a synthetic diagnostic for the Motional Stark Effect.
+
+version: 1.0
+Author: Ken Liao
+email: kenliao@physics.utexas.edu
+
+NBASS runs on IDL 7.0 and should run on later versions of IDL
+NBASS is tested on Linux but should work on Windows as well
+IDL is a scientific programming language owned by Harris Geospatial Solutions
+
+*File list:
+Filename              Description
+beam_param.idl        List of beam parameters
+blom.pro              Calculation of Blom approximation to the Zeeman effect
+calc_equil.pro        Calculation of the Tokamak magnetic equilibrium
+calc_geom_angles.pro  Calculation of angles and Lorentz transformation of fields
+common_param.idl      List of parameters
+detector_param.idl    List of detector parameters
+equil_param.idl       List of equilibrium parameters
+get_beam_data.pro     Routine to interpolate ALCBEAM results
+get_parameters.pro    Function that gets all parameters into a structure
+get_profiles.pro      Routine to read and interpolate profiles
+LICENSE.txt           License file
+make_chord.pro        Calculation of calculation grid
+mesh_param.idl        List of calculation grid parameters
+nbass.pro             Main program
+NOTICE.txt            Attribution notice
+param.idl             List of general parameters
+prof_param.idl        List of profile parameters
+README                This file
+run_nbass             Bash script for starting NBASS
+run_nbass.bat         DOS batch script for starting NBASS
+run_nbass.pro         Startup script for nbass, called by run_nbass
+starkzeeman.pro       Atomic calculation of the Stark-Zeeman spectrum at a point
+synth_bes.pro         Calculation of the MSE spectrum
+synth_bremsstrahlung.pro  Calculation of bremsstrahlung
+synth_cxrs.pro        Calculation of charge exchange recombination spectrum
+synth_edge.pro        Placeholder calculation for edge emission--not fully modeled
+view_param.idl        List of view parameters
+zeeman_boron.pro      Calculate the Zeeman effect for Boron
+zeeman_helium.pro     Calculate the Zeeman effect for Helium
+lib/                  Directory containing various library functions used in the code
+runs/                 Directory containing input and output for each "run" of the code
+tools/                Directory containing some tools for analyzing output from the code
+
+In lib/
+cmproduct.pro         Calculates the product of all elements of an array. (c) Craig Markwardt
+cmreplicate.pro       Replicates an array into a larger array. (c) Craig Markwardt
+defvalue.pro          Specifies a default value for a variable if undefined
+efit_psi2b.pro        Calculates the B field from EFIT arrays
+extend.pro            Replicates an array into a larger array
+figure.pro            Wrapper for IDL plot routines
+get_alcbeam.pro       Routine for interpolating ALCBEAM output
+mindex.pro            Searches an array for the closest match to a value
+num2str.pro           Converts a number to a string with given decimal places
+outer.pro             Calculates the outer product between two arrays
+read_alcbeam.pro      Routine for reading ALCBEAM results
+read_geqdsk.pro       Routine for reading EFIT g files into arrays
+savetomain.pro        Copies a variable to the MAIN IDL scope. (c) Fanning Software Consulting
+sign.pro              Returns the sign of the input number. (c) Chris Beaumont
+spline2d.pro          Calculates 2D cubic spline interpolation of an array and derivative
+tic.pro               Remembers the system time for checking performance
+toc.pro               Prints the time since the last tic call
+vector.pro            Various routines for manipulating 3D vectors
+
+In runs/
+test/                 Sample run with EAST-like parameters
+test/alcbeam_test.abi ALCBEAM input parameter file for test run
+test/alcbeam_test.abo ALCBEAM output file for test run
+test/g070079.03300    EFIT output g file for test run
+test/parameters.pro   parameters for the test run
+test/timemagneticlines.txt  Non-statistical beam population data table for test run
+
+In tools/
+bestfilter.pro        Calculate the best filter bandwidth to use for polarization MSE based on NBASS output
+compare_results.pro   Simply plot spectra from one or more runs for quick comparison
+filterstokes.pro      Apply a bandpass filter to NBASS results and show polarization of light
+fit_nbass.pro         Routines for fitting NBASS results to estimate spectral MSE performance
+export_ascii.pro      Export the NBASS output to a plain ASCII file
+
+*Installation
+The latest version of NBASS can be obtained from githab by logging into github.com and going to
+https://github.com/ut-ifs/nbass
+or searching in github for ut-ifs/nbass
+Download and extract the archive to any suitable directory.
+Choose a runs directory to store input and output of runs of the code.
+By default, the runs directory is in the 'runs' subdirectory in the program directory.
+Edit the 'run_nbass' file. Change the NBASS_PATH and NBASS_RUNS_PATH variables to contain the install and run paths.
+Now it should be possible to run the sample case below.
+
+Typically, you will also want to install ALCBEAM since the ALCBEAM output is used by NBASS,
+but ALCBEAM is not needed to run NBASS if the output file is copied from elsewhere.
+ALCBEAM can be obtained from github by logging into github.com and going to
+https://github.com/ut-ifs/alcbeam
+or searching in github for ut-ifs/alcbeam
+
+*Running the code
+In the following transcript, anything after a line starting with > indicates something to be typed in
+The follow steps show how to run the NBASS example run
+
+1. change to the directory where NBASS was installed
+2. > ./run_nbass
+3. > nbass,'test'
+This will instruct NBASS to look in the runs directory for a directory called 'test'.
+The parameters will be loaded by from the runs/test/parameters.pro file
+Wait a few minutes for the calculation to complete.
+Output from the code will be saved to the file "<nbass installation directory>"/runs/test/test_4.sav"
+4. > plot_results,'test','test_4.sav'
+This will plot results from a previous run which was saved to 'test_4.sav'
+Window 1 contains a plot of the synthetic spectral intensity.
+Window 2 contains a plot of the synthetic detector signal. There are 3 BES curves and 3 CXRS curves
+plotted in window 2 corresponding to 3 beam energy components.
+Window 3 shows the spectrum of stokes parameters.
+Window 4 shows the degree of polarization as a function of wavelength.
+Window 5 shows the polarization angle as a function of wavelength.
+5. > filterstokes,'test','test_4.sav',bandwidth=2.0,center=6600.0
+This will apply a bandpass filter to the results of the previous run, approximately
+centered on the full energy pi line.
+The textual output shows the Stokes parameters for the light that passes the bandpass filter.
+Window 1 shows the spectrum, degree of polarization, and filter function.
+Windows 3-5 shows what happens if the filter center wavelength is scanned over a short range.
+
+It is possible to create a parameters file that accepts additional arguments during runtime.
+This is useful for scanning a parameter value without creating many directories.
+In fact, the test parameters accepts a parameter called "channel". Try this:
+6. > nbass,'test',channel=10
+This will rerun NBASS with a slightly different set of parameters.
+The output will be saved to 'test_10.sav'
+A very simple tool can be used to compare two runs.
+7. > compare_results,['test/test_4.sav','test/test_10.sav']
+This will plot the spectra from both runs on the same plot, allowing quick comparison.
+8. > export_ascii,'test','test_4.sav','runs/test/test_4.txt'
+This will export the output of the NBASS run to a plain ASCII file.
+
+For a full explanation of the input parameters and output files, see the manual.
+
+The following are the steps to generate the ALCBEAM input file that is used by the test run.
+These steps do not have to be run, since the ALCBEAM input file is included for the test run,
+but serve as an example.
+1. install ALCBEAM v4.17
+2. change to the ALCBEAM program directory
+3. > idl
+4. > .r alcbeam
+5. > alcbeam
+6. Change the "Beam Type:" field to "<relative path to nbass>/runs/test/alcbeam_test" where
+<relative path to nbass> is the relative path to nbass, starting from your home directory.
+For example, if your home directory is /home/liao and nbass is installed at /home/liao/nbass,
+the text field should be "nbass/runs/test/alcbeam_test"
+7. press the "PREPARE A RUN" button
+8. press the "Settings" button to the right of "input data needed for the calculation"
+9. In the new window, to the right of "Load all data from:", pick "*.abi input file"
+The text field of every line should be filled with the full path to the alcbeam_test.abi file
+which is included with the NBASS installation.
+10. press Save, and then Close
+11. In the top level window, press LOAD
+12. Press the "Settings" button to the right of "data arrays needed for calculation"
+13. Change the field labeled "Location of ADAS files:" to
+"<full path to alcbeam installation directory>/adas"
+14. press Save, and then Close
+15. press CONSTRUCT
+16. press third Settings button below the CANCEL RUN button.
+17. change the dropbox by calc velocity distribution to "Yes"
+17. change the dropbox by "Save output to:" to "*.abo output file" and change the text field to
+"<full path to NBASS installation directory>/runs/test/alcbeam_test.abo"
+18. press Save, and then Close
+19. press CALC. Wait for the run to complete. Progress should be shown in the message box
+at the bottom of the ALCBEAM window.
+20. After the run is complete, close the program. There should be a file called alcbeam_test.abo
+in the output directory.
