@@ -72,13 +72,14 @@ function synth_bes,chord,field,beam,angle,lorentzE_norm,dangle_fg,dangle_ap,dang
     if keyword_set(beamingas) then begin
 	message,'cannot do Miller calculation for beam into gas'
     endif else begin
+	amplitude = extend(15,transpose(beam.n3[fb,*]*1d6))  ;[15,n_comp,n_bpoints]. 1/m^3
 	if keyword_set(nonstatistical) then begin
 	    chdist = sqrt((chord.x-beam.grid_pos[0])^2+(chord.y-beam.grid_pos[1])^2+(chord.z-beam.grid_pos[2])^2)
-	    ns_ratio = get_pop_ratio(nonstat_file,chdist)
-	    amplitude = ns_ratio * extend(15,transpose(beam.n3[fb,*]*1d6))  ;[15,n_comp,n_bpoints]. 1/m^3
-	endif else begin
-	    amplitude = extend(15,transpose(beam.n3[fb,*]*1d6))  ;[15,n_comp,n_bpoints]. 1/m^3
-	endelse
+	    ns_ratio = get_pop_ratio(nonstat_file,chdist[fb])
+	    ;We only use the nonstatistical model for the full energy component (component 0)
+	    ;The other components are assumed to be statistical due to low energy
+	    amplitude[*,0,*] *= ns_ratio
+	endif
     endelse
     amplitude /= 4*!dpi ; [15,n_comp,n_bpoints] 1/m^3/sr
 
