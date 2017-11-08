@@ -39,7 +39,7 @@ function spline2d,z,x,y,x2,y2,dx,dy
     result = dblarr(nr)
     if arg_present(dy) then dy = dblarr(nr)
     if arg_present(dx) then dx = dblarr(nr)
-    for j=0,nr-1 do begin
+    for j=0l,nr-1 do begin
 	der2 = spl_init(y,zi[*,j])
 	if arg_present(dy) then begin
 	    result[j] = spl_interp_der(y,zi[*,j],der2,y2[j],ddy)
