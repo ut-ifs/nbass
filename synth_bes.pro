@@ -147,7 +147,7 @@ function synth_bes,chord,field,beam,angle,lorentzE_norm,dangle_fg,dangle_ap,dang
 		endfor
 		;line_wve = (H_alpha+shifts)*extend([15],beam.gamma[j]*(1-beam.beta[j]*cos_alpha)) ;[15,num_pini]
 		line_wve = (H_alpha+shifts)/extend([15],beam.gamma[j]*(1+beam.beta[j]*cos_alpha)) ;[15,num_pini]
-		stokes *= outer(rebin(amplitude[*,j,i],15,4),reform(beam.pini_w[fb[i],*,j])) ;[15,n_comp,num_pini] ;pht/sec/m^3/sr
+		stokes *= outer(rebin(amplitude[*,j,i],15,4),reform(beam.pini_w[fb[i],*,j])) ;[15,4,num_pini] ;pht/sec/m^3/sr
 
 		if needwidth then begin
 		    sin_alpha = sqrt(1-cos_alpha^2)
@@ -156,7 +156,7 @@ function synth_bes,chord,field,beam,angle,lorentzE_norm,dangle_fg,dangle_ap,dang
 		    ;dline_wve_dbeta = (H_alpha+shifts)*extend([15],beam.gamma[j]*cos_alpha) ;[15,num_pini]
 		    dline_wve_dbeta = (H_alpha+shifts)*extend([15],1/beam.gamma[j]*cos_alpha) ;[15,num_pini]
 		    width2 = dline_wve_dalpha^2*(dalpha_ap[i]^2 + dalpha_sp[i]^2) + (dline_wve_dbeta*beam.beta[j]*beam_ripple/2)^2 + l_instr^2
-		    width = sqrt(width2)
+		    width = sqrt(width2) ;[15,num_pini]
 		endif
 
 		case linemodel of
@@ -211,7 +211,7 @@ function synth_bes,chord,field,beam,angle,lorentzE_norm,dangle_fg,dangle_ap,dang
 		    dline_wve_dalpha = (H_alpha+shifts)*extend([15],1/beam.gamma[j]*beam.beta[j]*sin_alpha) ;[15,num_pini]
 		    ;dline_wve_dbeta = (H_alpha+shifts)*extend([15],beam.gamma[j]*cos_alpha) ;[15,num_pini]
 		    dline_wve_dbeta = (H_alpha+shifts)*extend([15],1/beam.gamma[j]*cos_alpha) ;[15,num_pini]
-		    width2 = dline_wve_dalpha^2*(dalpha_ap^2 + dalpha_sp^2 + dalpha_fg^2) + (dline_wve_dbeta*beam.beta[j]*beam_ripple/2)^2 + l_instr^2
+		    width2 = dline_wve_dalpha^2*(dalpha_ap[i]^2 + dalpha_sp[i]^2 + dalpha_fg[i]^2) + (dline_wve_dbeta*beam.beta[j]*beam_ripple/2)^2 + l_instr^2
 		    width = sqrt(width2)
 		endif
 
