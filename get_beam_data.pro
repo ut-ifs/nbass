@@ -46,7 +46,7 @@ pro get_beam_data,beamid,chord,beam;,profiles
 	    num_pini=all_pini
 	    pini_x = ba[*,0]
 	    pini_y = ba[*,1]
-	    pini_w = alcbeam_results.angle_int[*,pini_index,*] ;will be an error if velocity distribution was not enabled in alcbeam
+	    pini_w = alcbeam_results.angle_int[*,*,*] ;will be an error if velocity distribution was not enabled in alcbeam
 	    pini_w /= rebin(reform(total(pini_w,2),chord.npoint,1,n_comp),chord.npoint,num_pini,n_comp) ;normalize across dimension 2
 	endif else begin
 	    ;Todo: make a better beam source grid interpolation
