@@ -266,9 +266,10 @@ end
 
 pro test_stark_zeeman,stop=stop
 ;reproduce the plots in Breton 1980
-    physicalconstants
     !p.background='ffffff'x
     !p.color='000000'x
+    c_cm_s=29979245800d
+    halpha=6562.7952d
 
     Bt = 5d4
     vr = [1.5d7, 6d7, 2.4d8, 1d7, 3d7, 2.4d8]
@@ -285,7 +286,7 @@ pro test_stark_zeeman,stop=stop
 	starkzeeman,Bt,EL[j],phi[j],psi,shifts,amplitudes,stop=stop,h_alpha=6562.7952d,vectH=vectH,vectV=vectV
 	starkzeeman,Bt,EL[j],phi[j],psi,shifts,amplitudes1,[[1,0],[0,0]],h_alpha=6562.7952d,vectH=vectH,vectV=vectV
 	starkzeeman,Bt,EL[j],phi[j],psi,shifts,amplitudes2,[[0,0],[0,1]],h_alpha=6562.7952d,vectH=vectH,vectV=vectV
-	shifts = (shifts - vr[j]*cos(phi[j])/!const.c.cm_s*!const.Halpha)/10d
+	shifts = (shifts - vr[j]*cos(phi[j])/c_cm_s*Halpha)/10d
 	amplitudes /= 9 * 1d6
 	amplitudes1 /= -9 * 1d6
 	amplitudes2 /= 9 * 1d6

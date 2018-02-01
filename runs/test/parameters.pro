@@ -87,7 +87,7 @@ pro parameters,channel=channel,filename=filename_
 ;   beam_ripple:  double. beam_ripple = stddev(E_beam)/E_beam
     num_beams = 1
     ;alcbeam should be run beforehand to generate an alcbeam file
-    alcbeam_file = '/home/helimak/kenliao/nbass_distro/runs/test/alcbeam_test.abo'
+    alcbeam_file = 'runs/test/alcbeam_test.abo'
     beam_ripple = 0.005d ;raised cosine peak-peak amplitude with same stddev beam ripple: = 0.005*60kV/sqrt(1/3 - 2/pi^2)/2 = 0.4149kV
 
 ; variables in group view_param
@@ -189,7 +189,7 @@ pro parameters,channel=channel,filename=filename_
     efit_shot = 70079 ;only used for MDSplus EFIT retrieval
     efit_time = 3.3  ;(s), only used for MDSplus EFIT retrieval
     ;parameters for option 'efit_file'
-    efit_file = '/home/helimak/kenliao/nbass_distro/runs/test/g070079.03300'
+    efit_file = 'runs/test/g070079.03300'
 
     Ermodel = 'none'
     Er_r = [1.4,3]

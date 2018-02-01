@@ -31,7 +31,7 @@
 pro nbass,run,_REF_EXTRA=extra
     @common_param.idl
     tic ;start calculation timer
-    print,'Neutral Beam Active Spectroscopy Simulation (v 1.0)'
+    print,'Neutral Beam Active Spectroscopy Simulation (v 1.02)'
     print,'contact: Ken Liao <kenliao@physics.utexas.edu>'
 
     defvalue,run,'test'

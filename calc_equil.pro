@@ -222,7 +222,7 @@ pro calc_equil,chord,field,plot=plot
 	'efit_file': begin
 	if file_search(efit_file) eq efit_file then begin
 	    gdata = read_geqdsk(filename=efit_file,/quiet)
-	endif
+	endif else message,'Cannot find EFIT geqdsk file (efit_file): '+efit_file
 
 	zind = mindex(gdata.zgrid,0)
 	psimidplane = gdata.psirz[*,zind]
