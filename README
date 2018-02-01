@@ -65,8 +65,9 @@ vector.pro            Various routines for manipulating 3D vectors
 
 In runs/
 test/                 Sample run with EAST-like parameters
-test/alcbeam_test.abi ALCBEAM input parameter file for test run
-test/alcbeam_test.abo ALCBEAM output file for test run
+test/alcbeam_small.abi ALCBEAM input parameter file for small test run
+test/alcbeam_small.abo ALCBEAM output file for small test run
+test/alcbeam_test.abi ALCBEAM input parameter file for full test run
 test/g070079.03300    EFIT output g file for test run
 test/parameters.pro   parameters for the test run
 test/timemagneticlines.txt  Non-statistical beam population data table for test run
