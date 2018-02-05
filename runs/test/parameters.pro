@@ -87,7 +87,7 @@ pro parameters,channel=channel,filename=filename_
 ;   beam_ripple:  double. beam_ripple = stddev(E_beam)/E_beam
     num_beams = 1
     ;alcbeam should be run beforehand to generate an alcbeam file
-    alcbeam_file = 'runs/test/alcbeam_test.abo'
+    alcbeam_file = 'runs/test/alcbeam_small.abo'
     beam_ripple = 0.005d ;raised cosine peak-peak amplitude with same stddev beam ripple: = 0.005*60kV/sqrt(1/3 - 2/pi^2)/2 = 0.4149kV
 
 ; variables in group view_param
