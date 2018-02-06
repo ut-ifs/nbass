@@ -32,9 +32,9 @@ pro filterstokes,run,filename,bandwidth=bandwidth,center=center
     int_pol = sqrt(int_s1^2 + int_s2^2 + int_s3^2)/int_s0
     int_psi = atan(int_s2,int_s1)/2
     int_chi = atan(int_s3,sqrt(int_s1^2+int_s2^2))/2
-    print,'pol:',int_pol
-    print,'psi:',int_psi
-    print,'chi:',int_chi
+    print,'polarization:',int_pol
+    print,'psi (pol. angle):',int_psi
+    print,'chi (ellipticity):',int_chi
 
     filtercenters = maken(center-8d,center+8d,200)
     all_pol = dblarr(200)
@@ -56,8 +56,8 @@ pro filterstokes,run,filename,bandwidth=bandwidth,center=center
     ploti,filtercenters,all_pol,charsize=1.6,ptitle='Polarization vs filter center',xtitle='wavelength',ytitle='polarization',icolor=0
     figure,4
     clf,/all
-    ploti,filtercenters,all_psi,charsize=1.6,ptitle='psi vs filter center',xtitle='wavelength',ytitle='psi',icolor=0
+    ploti,filtercenters,all_psi,charsize=1.6,ptitle='psi vs filter center',xtitle='wavelength',ytitle='psi (pol. angle)',icolor=0
     figure,5
     clf,/all
-    ploti,filtercenters,all_chi,charsize=1.6,ptitle='chi vs filter center',xtitle='wavelength',ytitle='chi',icolor=0
+    ploti,filtercenters,all_chi,charsize=1.6,ptitle='chi vs filter center',xtitle='wavelength',ytitle='chi (ellipticity)',icolor=0
 end
