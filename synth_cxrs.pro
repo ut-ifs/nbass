@@ -337,7 +337,8 @@ function synth_cxrs,chord,field,beam,angle,profiles,cxrs_data,species
 ;clf,/all
 ;pol = (s3[*,0] gt 0) + 2*(s3[*,0] lt 0)
 		for j=0,n_zeeman-1 do begin
-		    print,'.',format='(A,$)'
+		    ;print,'.',format='(A,$)'
+		    print,'j='+strtrim(j,2)+'/'+strtrim(n_zeeman,2)+' : '+strtrim(100.0*j/n_zeeman,2)+'%'
 		    wvenew = rebin(reform(wvezeeman[j,*]),n_bpoints,n_comp) + cswveshift
 		    ;ampnew = lineemis*rebin(reform(ampzeeman[j,*]),n_bpoints,n_comp)
 		    s0new = lineemis*rebin(reform(s0[j,*]),n_bpoints,n_comp)

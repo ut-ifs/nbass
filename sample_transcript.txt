@@ -1,0 +1,183 @@
+./run_nbass
+Neutral Beam Active Spectroscopy Simulation (v 1.0)
+contact: Ken Liao <kenliao@physics.utexas.edu>
+type: "nbass,'<name of run>'" to start a run
+IDL> nbass,'test'
+Neutral Beam Active Spectroscopy Simulation (v 1.02)
+contact: Ken Liao <kenliao@physics.utexas.edu>
+Loading parameters for run test
+spot position:     -0.21794603       1.8702842       0.0000000
+done.
+time elapsed: 0.00467 s
+heap memory used:    1534005, max:    1565427, gets:     2350, frees:     1295
+
+Creating calculation grid
+done.
+time elapsed: 0.0239 s
+heap memory used:    6080221, max:   11982349, gets:     3708, frees:     2649
+
+Calculating magnetic equilibrium
+done.
+time elapsed: 0.74 s
+heap memory used:    7328893, max:   44217405, gets:   459096, frees:   458034
+
+Interpolating plasma profiles
+done.
+time elapsed: 0.745 s
+heap memory used:    8838621, max:   10599389, gets:   459157, frees:   458093
+
+Reading beam data
+Reading ALCBEAM file runs/test/alcbeam_small.abo
+Beam: SMALL_FILE_TEST
+Shot: 1000
+Time interval: 8.500, 9.500 sec
+Beam full energy: 60.000 keV
+Energy fractions:  (E/1) (E/2) (E/3)
+** Structure <18983c8>, 6 tags, length=4147576, data length=4147576, refs=1:
+   E               FLOAT           60.0000
+   N_BEAM          FLOAT     Array[31421]
+   EXC_N2_FRAC     FLOAT     Array[31421]
+   EXC_N3_FRAC     FLOAT     Array[31421]
+   ANGLE           FLOAT     Array[31421, 15]
+   ANGLE_INT       FLOAT     Array[31421, 15]
+done.
+time elapsed: 0.986 s
+heap memory used:   16012408, max:   42913190, gets:   464224, frees:   463147
+
+Calculating geometric angles and Lorentz transform
+done.
+time elapsed: 1.08 s
+heap memory used:   26072608, max:   52974912, gets:   464553, frees:   463467
+
+Calculating MSE spectrum
+Calculate emission amplitude
+loop size (plasma points, beam energies, source points):7098x3x15
+i=0/7098 : 0.00000%
+i=50/7098 : 0.704424%
+i=100/7098 : 1.40885%
+i=150/7098 : 2.11327%
+i=200/7098 : 2.81770%
+.... abbreviated lines ....
+i=7000/7098 : 98.6193%
+i=7050/7098 : 99.3238%
+done.
+time elapsed: 215 s
+heap memory used:   26212648, max:   32107384, gets: 203736501, frees: 203735378
+
+Calculating CXRS spectrumD_3_2
+# chordbeam points        7098
+Blom Zeeman parameterization
+j=0/3 : 0.00000%
+j=1/3 : 33.3333%
+j=2/3 : 66.6667%
+done.
+time elapsed: 224 s
+heap memory used:   26262720, max:   31581288, gets: 203767587, frees: 203766462
+
+Calculating bremsstrahlung spectrum
+done.
+time elapsed: 225 s
+heap memory used:   26320928, max:  412665640, gets: 203767610, frees: 203766479
+
+Calculating detector noise
+done.
+time elapsed: 225 s
+heap memory used:   26414272, max:   26414720, gets: 203769664, frees: 203768528
+
+NBASS calculation complete.
+Results have been saved to /home/helimak/kenliao/nbass_distro/runs/test/test_4.sav
+type "plot_results,'test','test_4.sav'" to plot results
+IDL> plot_results,'test','test_4.sav'
+IDL> filterstokes,'test','test_4.sav',bandwidth=2.0,center=6600.0
+integrated s0,s1,s2,s3:   1.8636064e+16  -1.7602960e+16  -2.1836908e+14
+   4.3548130e+15
+pol:      0.97311033
+psi:      -1.5645940
+chi:      0.12125182
+IDL> nbass,'test',channel=10
+Neutral Beam Active Spectroscopy Simulation (v 1.02)
+contact: Ken Liao <kenliao@physics.utexas.edu>
+Loading parameters for run test
+spot position:     -0.33385470       1.9910237       0.0000000
+done.
+time elapsed: 0.00307 s
+heap memory used:    1615770, max:   44053443, gets: 203813235, frees: 203812107
+
+Creating calculation grid
+done.
+time elapsed: 0.0177 s
+heap memory used:    6182146, max:   12110482, gets: 203814593, frees: 203813461
+
+Calculating magnetic equilibrium
+done.
+time elapsed: 0.666 s
+heap memory used:    6936266, max:   40980850, gets: 204230962, frees: 204229828
+
+Interpolating plasma profiles
+done.
+time elapsed: 0.67 s
+heap memory used:    8322442, max:    9939066, gets: 204231023, frees: 204229887
+
+Reading beam data
+Reading ALCBEAM file runs/test/alcbeam_small.abo
+Beam: SMALL_FILE_TEST
+Shot: 1000
+Time interval: 8.500, 9.500 sec
+Beam full energy: 60.000 keV
+Energy fractions:  (E/1) (E/2) (E/3)
+** Structure <41c44c8>, 6 tags, length=3807808, data length=3807808, refs=1:
+   E               FLOAT           60.0000
+   N_BEAM          FLOAT     Array[28847]
+   EXC_N2_FRAC     FLOAT     Array[28847]
+   EXC_N3_FRAC     FLOAT     Array[28847]
+   ANGLE           FLOAT     Array[28847, 15]
+   ANGLE_INT       FLOAT     Array[28847, 15]
+done.
+time elapsed: 0.891 s
+heap memory used:   14902452, max:   39716754, gets: 204236036, frees: 204234897
+
+Calculating geometric angles and Lorentz transform
+done.
+time elapsed: 0.971 s
+heap memory used:   24138972, max:   48837932, gets: 204236365, frees: 204235217
+
+Calculating MSE spectrum
+Calculate emission amplitude
+loop size (plasma points, beam energies, source points):8467x3x15
+i=0/8467 : 0.00000%
+i=50/8467 : 0.590528%
+i=100/8467 : 1.18106%
+i=150/8467 : 1.77158%
+.... abbreviated lines ....
+i=8400/8467 : 99.2087%
+i=8450/8467 : 99.7992%
+done.
+time elapsed: 256 s
+heap memory used:   24226412, max:   31202076, gets: 446636131, frees: 446634981
+
+Calculating CXRS spectrumD_3_2
+# chordbeam points        8467
+Blom Zeeman parameterization
+j=0/3 : 0.00000%
+j=1/3 : 33.3333%
+j=2/3 : 66.6667%
+done.
+time elapsed: 267 s
+heap memory used:   24276484, max:   30617708, gets: 446667217, frees: 446666065
+
+Calculating bremsstrahlung spectrum
+done.
+time elapsed: 268 s
+heap memory used:   24334692, max:  379029500, gets: 446667240, frees: 446666082
+
+Calculating detector noise
+done.
+time elapsed: 268 s
+heap memory used:   24428036, max:   24428484, gets: 446669294, frees: 446668131
+
+NBASS calculation complete.
+Results have been saved to /home/helimak/kenliao/nbass_distro/runs/test/test_10.sav
+type "plot_results,'test','test_10.sav'" to plot results
+IDL> compare_results,['test/test_4.sav','test/test_10.sav']
+IDL> export_ascii,'test','test_4.sav','runs/test/test_4.txt'
+36965652 bytes written to runs/test/test_4.txt

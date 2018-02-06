@@ -31,6 +31,7 @@ README                This file
 run_nbass             Bash script for starting NBASS
 run_nbass.bat         DOS batch script for starting NBASS
 run_nbass.pro         Startup script for nbass, called by run_nbass
+sample_transcript.txt Transcript of the sample run given in the README and manual
 starkzeeman.pro       Atomic calculation of the Stark-Zeeman spectrum at a point
 synth_bes.pro         Calculation of the MSE spectrum
 synth_bremsstrahlung.pro  Calculation of bremsstrahlung

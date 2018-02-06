@@ -244,7 +244,7 @@ pro plot_results,run,filename,_REF_EXTRA=extra
 	figure,3
 	clf,/all
 	yrange = [min([stokes_s1,stokes_s2,stokes_s3]),max(stokes_s0)]
-	ploti,wve,stokes_s0,charsize=1.6,ptitle='Stokes parameters',isection=0,xrange=[6550,6620],yrange=yrange,icolor=0
+	ploti,wve,stokes_s0,charsize=1.5,ptitle='Stokes parameters',isection=0,xrange=[6550,6620],yrange=yrange,icolor=0,xtitle='wavelength (A)',ytitle='ph/m^2/s/sr/A'
 	oploti,wve,stokes_s1,icolor=1,isection=0
 	oploti,wve,stokes_s2,icolor=2,isection=0
 	oploti,wve,stokes_s3,icolor=3,isection=0
@@ -252,13 +252,13 @@ pro plot_results,run,filename,_REF_EXTRA=extra
 
 	figure,4
 	clf,/all
-	ploti,wve,poldegree,charsize=1.6,ptitle='Degree of polarization',icolor=0,isection=1,xrange=[6550,6620],yrange=[0,1.2]
+	ploti,wve,poldegree,charsize=1.5,ptitle='Degree of polarization',icolor=0,isection=1,xrange=[6550,6620],yrange=[0,1.2],xtitle='wavelength (A)'
 	oploti,wve,linpoldegree,icolor=2,isection=1
 	legendi,icolor=[0,2],label=['degree of polarization','deg of linear pol'],charsize=1.6
 
 	figure,5
 	clf,/all
-	ploti,wve,spsi,charsize=1.6,ptitle='Polarization angle',ytitle='radians',isection=2,xrange=[6550,6620],yrange=[-!dpi/4,!dpi/4],icolor=0
+	ploti,wve,spsi,charsize=1.5,ptitle='Polarization angle',ytitle='radians',isection=2,xrange=[6550,6620],yrange=[-!dpi/4,!dpi/4],icolor=0,xtitle='wavelength (A)'
 	oploti,wve,spsi+!dpi/2,icolor=2,isection=2
 	legendi,icolor=[0,2],label=['Polarization angle','Pol angle + \pi/2'],charsize=1.6
     endif

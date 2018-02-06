@@ -112,7 +112,7 @@ function synth_bes,chord,field,beam,angle,lorentzE_norm,dangle_fg,dangle_ap,dang
     endelse
 ;    sigmas = [1,3,5,7,9,11,13]
 ;    pis =    [0,2,4,6,8,10,12,14]
-    print,'starkzeeman'
+;    print,'starkzeeman'
     shifts = dblarr(15,num_pini)
     stokes = dblarr(15,4,num_pini)
     spectrum = dblarr(n_bin,n_comp,4) ;last dim is stokes vector
@@ -121,7 +121,8 @@ function synth_bes,chord,field,beam,angle,lorentzE_norm,dangle_fg,dangle_ap,dang
     print,'loop size (plasma points, beam energies, source points):'+strtrim(n_bpoints,2)+'x'+strtrim(n_comp,2)+'x'+strtrim(num_pini,2)
     for i=0,n_bpoints-1 do begin
     ;for i=fb0-fb[0],fb0-fb[0] do begin ;special test
-	print,'.',format='(A,$)'
+	;print,'.',format='(A,$)'
+	if i mod 50 eq 0 then print,'i='+strtrim(i,2)+'/'+strtrim(n_bpoints,2)+' : '+strtrim(100.0*i/n_bpoints,2)+'%'
 	if num_pini gt 1 then begin
 	    pos = [chord.x[fb[i]],chord.y[fb[i]],chord.z[fb[i]]]  ;[3]
 	    beam_vect = extend([num_pini],pos) - beam.pini_pos ;[num_pini, 3]
